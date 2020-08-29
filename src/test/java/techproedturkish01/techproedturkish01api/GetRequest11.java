@@ -2,6 +2,9 @@ package techproedturkish01.techproedturkish01api;
 
 import org.junit.Test;
 import org.testng.asserts.SoftAssert;
+
+import com.google.gson.Gson;
+
 import io.restassured.response.Response;
 import static io.restassured.RestAssured.*;
 import java.util.HashMap;
@@ -36,11 +39,15 @@ public class GetRequest11 extends TestBase {
 		
 		
 //		userId, id ve title degerlerini verify ediniz
-		softAssert.assertEquals(map.get("userId"), 1.0);
-		softAssert.assertEquals(map.get("id"), 2.0);
+		softAssert.assertEquals(map.get("userId"), 1);
+		softAssert.assertEquals(map.get("id"), 2);
 		softAssert.assertEquals(map.get("title"), "quis ut nam facilis et officia qui");
 		softAssert.assertAll();
 		
+//		Java Object'ini Json formatina cevirme
+		Gson gson = new Gson();
+		String jsonFromMapClass = gson.toJson(map);
+		System.out.println(jsonFromMapClass);
 		
 		
 		

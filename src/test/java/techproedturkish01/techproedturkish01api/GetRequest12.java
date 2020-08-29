@@ -2,6 +2,9 @@ package techproedturkish01.techproedturkish01api;
 
 import org.junit.Test;
 import org.testng.asserts.SoftAssert;
+
+import com.google.gson.Gson;
+
 import io.restassured.response.Response;
 import static io.restassured.RestAssured.*;
 
@@ -26,7 +29,10 @@ public class GetRequest12 extends TestBase {
 				  				get();
 		response.prettyPrint();
 		
+//		Json formatindaki data'yi Java Object'ini kullanarak GSON kullanilarak cevirme ==>De-Serialization
+		
 		List<Map<String, Object>> listOfMap = response.as(ArrayList.class);
+		
 		System.out.println(listOfMap.size());
 		System.out.println(listOfMap.get(0));// indeks(0)
 		
@@ -45,6 +51,11 @@ public class GetRequest12 extends TestBase {
 //		sondan bir onceki elemanin title'nin "numquam repellendus a magnam" oldugunu verify
 		softAssert.assertEquals(listOfMap.get(listOfMap.size()-2).get("title"),"numquam repellendus a magnam");
 		softAssert.assertAll();
+		
+// ***	Java Object'ini Json formatina cevirme
+		Gson gson = new Gson();
+		String jsonFromList = gson.toJson(listOfMap);
+		System.out.println(jsonFromList);
 		
 	}
 
